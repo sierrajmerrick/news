@@ -9,7 +9,8 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ( 
             "username", 
             "email",
-            "availability"
+            "availability",
+            "day",
         )  # new 
  
  
@@ -19,7 +20,8 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ( 
             "username", 
             "email", 
-            "availability"
+            "availability",
+            "day",
         )  # new
 
         
