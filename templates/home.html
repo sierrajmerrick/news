@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Home{% endblock title %}
 {% block content %} 
 {% if user.is_authenticated %}
-<p>Hi {{ user.username }}! You are {{ user.age }} years old.</p>
+<p>Hi {{ user.username }}! You are currently scheduled for tutoring on {{ user.availability }}.</p>
 <form action="{% url 'logout' %}" method="post">
   {% csrf_token %}
   <button type="submit">Log Out</button>
