@@ -2,6 +2,7 @@
 
 {% block title %}TA Profile - {{ ta.username }}{% endblock title %}
 
+{% block content %}
 <div>
     <h2>TA Profile: {{ ta.username }}</h2>
     <p><strong>Email Address:</strong> {{ ta.email|default:"None" }}</p>

@@ -13,7 +13,7 @@ class SignUpView(CreateView):
 
 def home_view(request):
     slots = Availability.objects.all()
-    return render(request, 'home.html', {'availabilites': slots})
+    return render(request, 'home.html', {'availabilities': slots})
 
 def ta_detail_view(request, pk):
     ta =get_object_or_404(CustomUser, pk=pk)
@@ -28,7 +28,7 @@ def add_hours_view(request):
             slot.ta = request.user
             slot.save()
             return redirect('home')
-        else: 
-            form = AvailabilityForm()
+    else: 
+        form = AvailabilityForm()
 
-        return render(request, 'add_hours.html', {'form': form})
+    return render(request, 'add_hours.html', {'form': form})
