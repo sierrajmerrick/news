@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser 
+from django import forms
+from .models import CustomUser, Availability
 
 
 
@@ -9,8 +10,7 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ( 
             "username", 
             "email",
-            "availability",
-            "day",
+            "courses",
         )  # new 
  
  
@@ -20,8 +20,12 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ( 
             "username", 
             "email", 
-            "availability",
-            "day",
+            "courses",
         )  # new
 
+
+class AvailabilityForm(forms.ModelForm):
+    class Meta:
+        model = Availability
+        fields = ('day', 'time_slot')
         

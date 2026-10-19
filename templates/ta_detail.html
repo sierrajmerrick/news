@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}TA Profile - {{ ta.username }}{% endblock title %}
+
+<div>
+    <h2>TA Profile: {{ ta.username }}</h2>
+    <p><strong>Email Address:</strong> {{ ta.email|default:"None" }}</p>
+
+    <h3>Courses</h3>
+    <ul>
+        {% for course in ta.courses.all %}
+            <li><strong>{{ course.course_code }}</strong></li>
+        {% empty %}
+            <li>This TA hasn't listed any courses yet.</li>
+        {% endfor %}
+    </ul>
+     <a href="{% url 'home' %}" class="btn">&larr; Back to Schedule</a>
+</div>
+{% endblock content %}

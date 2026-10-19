@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Add Availability Hours{% endblock title %}
+
+{% block content %}
+
+<div>
+    <h2>Add Your Tutoring Availability</h2>
+    <p>Fill out the form below to add new hours.</p>
+    
+     <form method="post" action="{% url 'add_hours' %}">
+        {% csrf_token %}
+
+        <div>
+            {{ form.as_p }}
+        </div>
+
+         <button type="submit">
+            Save Availability
+        </button>
+        
+        <a href="{% url 'home' %}">Cancel</a>
+    </form>
+</div>
+{% endblock content %}
