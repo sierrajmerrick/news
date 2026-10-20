@@ -4,22 +4,53 @@
 
 {% block content %}
 
-<div>
-    <h2>Add Your Tutoring Availability</h2>
-    <p>Fill out the form below to add new hours.</p>
-    
-     <form method="post" action="{% url 'add_hours' %}">
-        {% csrf_token %}
+<section class="auth-page">
 
-        <div>
-            {{ form.as_p }}
+    <div class="auth-container">
+
+        <!-- Page Header -->
+        <div class="auth-header">
+
+            <span class="auth-badge">
+                MANAGE AVAILABILITY
+            </span>
+
+            <h1>
+                Add Tutoring <span>Hours.</span>
+            </h1>
+
+            <p>
+                Let students know when you're available
+                to help them succeed.
+            </p>
+
         </div>
 
-         <button type="submit">
-            Save Availability
-        </button>
-        
-        <a href="{% url 'home' %}">Cancel</a>
-    </form>
-</div>
+        <!-- Availability Form -->
+        <div class="auth-card availability-card">
+
+            <form method="post" action="{% url 'add_hours' %}">
+
+                {% csrf_token %}
+
+                <div class="availability-fields">
+                    {{ form.as_p }}
+                </div>
+
+                <button type="submit" class="auth-submit">
+                    Save Availability →
+                </button>
+
+                <a href="{% url 'home' %}" class="cancel-button">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
 {% endblock content %}

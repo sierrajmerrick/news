@@ -1,49 +1,95 @@
 {% extends "base.html" %} {% block title %}Home{% endblock title %} 
 
 {% block content %}
-<div class="auth-section">
-  {% if user.is_authenticated %}
-  <p>Hello, {{ user.username }}.</p>
-  {% if user.courses.all %}
-  <a href="{% url 'add_hours' %}" class="btn">Add Your Availability Hours</a> |
-  {% endif %}
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge">
+      UNIVERSITY OF MONTANA
+    </span>
 
-  <form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Log Out</button>
-  </form>
+    <h1>
+      Learn Better. 
+      <span>Together.</span>
+    </h1>
 
-  {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
-  {% endif %}
-</div>
+    <p>
+      Connect with teaching assistants, explore available
+      tutoring sessions, and get the academic support
+      you need to succeed.
+    </p>
+    <a href="#tutoring-hours" class="hero-button">
+      Explore Tutoring Hours ↓
+    </a>
 
-<h2>All Tutoring Hours</h2>
-<table>
-  <thead>
-    <tr>
-      <th>TA Name</th>
-      <th>Day</th>
-      <th>Time</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for slot in availabilities %}
-    <tr>
-      <td>
-        <a href="{% url 'ta_detail' slot.ta.id %}"> {{ slot.ta.username }} </a>
-      </td>
-      <td>{{ slot.get_day_display }}</td>
-      <td>{{ slot.time_slot }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="3">No tutoring hours have been scheduled yet.</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  </div>
+
+</section>
+
+{% if user.is_authenticated %}
+
+    {% if user.courses.all %}
+
+        <div class="ta-actions">
+
+            <p>
+                Welcome back, {{ user.username }}!
+            </p>
+
+            <a href="{% url 'add_hours' %}" class="add-hours-button">
+                + Add Your Availability Hours
+            </a>
+
+        </div>
+
+    {% endif %}
+
+{% endif %}
+
+<section id="tutoring-hours" class="tutoring-section">
+
+  <div class="section-header">
+
+    <span class="section-badge">
+      ACADEMIC SUPPORT
+    </span>
+    
+    <h2>
+      Available Tutoring Hours
+    </h2>
+
+    <p>
+      Find the perfect tutoring session and get the academic support you need to succeed. Explore the available tutoring hours below and connect with our dedicated teaching assistants.
+    </p>
+  </div>
+
+  <div class="tutoring-card">
+    <table class="tutoring-table">
+      <thead>
+        <tr>
+          <th>TA Name</th>
+          <th>Day</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for slot in availabilities %}
+        <tr>
+          <td>
+            <a href="{% url 'ta_detail' slot.ta.id %}"> {{ slot.ta.username }} </a>
+          </td>
+          <td>{{ slot.get_day_display }}</td>
+          <td>{{ slot.time_slot }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" class="empty-state">
+            No tutoring hours have been scheduled yet.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
 
 {% endblock content %}

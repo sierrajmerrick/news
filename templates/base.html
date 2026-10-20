@@ -1,20 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% block title %}Newspaper App{% endblock title %}</title>
+    <title>{% block title %}TutorHub{% endblock title %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
     <link
-      href="https://jsdelivr.net"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
+      rel="stylesheet" href="{% static 'css/style.css' %}"
     />
+    
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg custom-navbar" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">Newspaper</a>
+        <a class="navbar-brand custom-brand" href="{% url 'home' %}">
+          Tutor<span>Hub.</span>
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -28,9 +37,9 @@
         </button>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 custom-nav-links">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              <a class="nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}"{% if request.resolver_match.url_name == 'home' %} aria-current="page"{% endif %} href="{% url 'home' %}">Home</a>
             </li>
           </ul>
 
@@ -65,9 +74,13 @@
                 </li>
               {% else %}
                 <!-- Login/Signup buttons for logged out guests -->
-                <li class="nav-item d-flex">
-                  <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
-                  <a href="{% url 'signup' %}" class="btn btn-primary ms-2">Sign up</a>
+                <li class="nav-item d-flex align-items-center gap-3 auth-buttons">
+                  <a href="{% url 'login' %}" class="login-link">
+                    Log in
+                  </a>
+                  <a href="{% url 'signup' %}" class="signup-button">
+                    Sign up
+                  </a>
                 </li>
               {% endif %}
             </ul>
@@ -78,15 +91,42 @@
       </div>
     </nav>
 
-    <main class="container mt-4">
+    <main class="main-content">
         {% block content %} 
         {% endblock content %}
     </main>
+    <footer class="site-footer">
 
-    <script
-      src="https://jsdelivr.net"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
+      <div class="footer-content">
+
+        <a href="{% url 'home' %}" class="footer-brand">
+            Tutor<span>Hub.</span>
+        </a>
+
+        <p>
+            Supporting student success at the
+            University of Montana.
+        </p>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+
+            <span>
+                &copy; 2026 TutorHub. All rights reserved.
+            </span>
+
+            <span>
+                Made for students, by students.
+            </span>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
   </body>
 </html>

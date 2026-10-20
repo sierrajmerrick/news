@@ -3,18 +3,82 @@
 {% block title %}TA Profile - {{ ta.username }}{% endblock title %}
 
 {% block content %}
-<div>
-    <h2>TA Profile: {{ ta.username }}</h2>
-    <p><strong>Email Address:</strong> {{ ta.email|default:"None" }}</p>
 
-    <h3>Courses</h3>
-    <ul>
-        {% for course in ta.courses.all %}
-            <li><strong>{{ course.course_code }}</strong></li>
-        {% empty %}
-            <li>This TA hasn't listed any courses yet.</li>
-        {% endfor %}
-    </ul>
-     <a href="{% url 'home' %}" class="btn">&larr; Back to Schedule</a>
-</div>
+<section class="auth-page">
+
+    <div class="auth-container ta-profile">
+
+        <!-- Page Header -->
+        <div class="auth-header">
+
+            <span class="auth-badge">
+                TEACHING ASSISTANT
+            </span>
+
+            <h1>
+                Tutor <span>Profile.</span>
+            </h1>
+
+            <p>
+                Get to know your teaching assistant
+                and discover the courses they can help with.
+            </p>
+
+        </div>
+
+        <!-- TA Profile Card -->
+        <div class="auth-card">
+
+            <div class="ta-profile-header">
+
+                <div class="ta-avatar">
+                    {{ ta.username|slice:":1"|upper }}
+                </div>
+
+                <h2>{{ ta.username }}</h2>
+
+                <p>
+                    {{ ta.email|default:"No email available" }}
+                </p>
+
+            </div>
+
+            <div class="ta-courses">
+
+                <h3>Courses Taught</h3>
+
+                <div class="course-list">
+
+                    {% for course in ta.courses.all %}
+
+                        <span class="course-badge">
+                            {{ course.course_code }}
+                        </span>
+
+                    {% empty %}
+
+                        <p class="no-courses">
+                            This TA hasn't listed any courses yet.
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            <div class="ta-profile-footer">
+
+                <a href="{% url 'home' %}" class="back-home">
+                    ← Back to Schedule
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 {% endblock content %}
